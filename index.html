@@ -2,110 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday :)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --primary-color: #ff007f;
-      --button-color: #ff4da6;
-      --button-hover: #ff3399;
-      --gradient-start: #f8cdda;
-      --gradient-end: #f88fba;
-    }
-
     body {
       margin: 0;
-      font-family: 'Dancing Script', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(to right, #ffb6ff, #ff80bf);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
     }
 
     .card {
-      background-color: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
       text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 400px;
-      opacity: 0;
-      transform: translateY(50px);
     }
 
-    @keyframes bounceIn {
-      0% {
-        opacity: 50;
-        transform: translateY(50px);
-      }
-      60% {
-        transform: translateY(-10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card.show {
-      animation: bounceIn 1s ease-out forwards;
+    .card img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 1rem;
     }
 
     .card h1 {
-      color: var(--primary-color);
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #ff0080;
+      margin-bottom: 0.5rem;
     }
 
     .card p {
-      color: #444;
-      font-size: 14px;
-      margin: 5px 0;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1.5rem;
     }
 
-    .heart {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: var(--button-color);
+    .card button {
+      background-color: #ff33aa;
       color: white;
       border: none;
-      border-radius: 25px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 77, 166, 0.5);
-      font-weight: bold;
-      transition: background-color 0.5s ease, transform 0.2s ease;
+      transition: background-color 0.3s ease;
     }
 
-    .btn:hover {
-      background-color: var(--button-hover);
-      transform: scale(1.05);
+    .card button:hover {
+      background-color: #e6008d;
     }
   </style>
 </head>
 <body>
-  <main>
-    <div class="card" role="region" aria-label="Birthday greeting">
-      <div class="heart" aria-hidden="true">❤️</div>
-      <h1>Happy Birthday!!</h1>
-      <p>Hey,</p>
-      <p>Today is your special day. Wishing you a wonderful day filled with smiles and joy.</p>
-      <button class="btn" aria-label="Click for a Surprise" onclick="window.location.href='ivy.html?play=1'">Click for a Surprise!</button>
-    </div>
-  </main>
-
-  <script>
-    window.onload = () => {
-      const card = document.querySelector('.card');
-      setTimeout(() => {
-        card.classList.add('show');
-      }, 100);
-    };
-  </script>
+  <div class="card">
+    <img src="https://twemoji.maxcdn.com/v/latest/72x72/2764.png" alt="Heart Emoji" />
+    <h1>Happy Birthday!!</h1>
+    <p>Hey,<br>Today is your special day. Wishing you a wonderful day filled with smiles and joy.</p>
+    <button onclick="alert('🎉 Surprise!')">Click for a Surprise!</button>
+  </div>
 </body>
 </html>
