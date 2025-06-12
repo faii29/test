@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Candle Blow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+  />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .time-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .time-box span {
+      display: block;
+    }
+
+    .number {
+      font-size: 2.5rem;
+      color: #ff4d88;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 1rem;
+      color: #777;
+    }
+
+    #cakeContainer {
+      display: none; /* hidden until unlock */
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .candle-count-display {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: #ff6999;
+      color: white;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #888;
+    }
+
+    .footer .heart {
+      width: 20px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Countdown Timer (will hide at midnight) -->
+  <div id="countdownTimer" class="countdown">
+    <div class="time-box">
+      <span class="number" id="days">00</span>
+      <span class="label">Days</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="hours">00</span>
+      <span class="label">Hours</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="minutes">00</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="seconds">00</span>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+
+  <!-- Cake & Message (appears after unlock) -->
+  <div id="cakeContainer">
+    <div class="candle-count-display">
+      HAPPY BIRTHDAY IVORY!
+    </div>
+
+    <div class="cake">
+      <div id="candleCount" style="display: none;"></div>
+      <div class="plate"></div>
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
+      <div class="icing"></div>
+      <div class="drip drip1"></div>
+      <div class="drip drip2"></div>
+      <div class="drip drip3"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    &nbsp; &nbsp; Made with 
+    <svg class="heart" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="">
+      <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#ff6999"></path>
+    </svg>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2"></script>
+  <script>
+    const unlockTime = new Date("June 6, 2025 00:00:00").getTime();
+    const cakeContainer = document.getElementById("cakeContainer");
+    const countdownTimer = document.getElementById("countdownTimer");
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = unlockTime - now;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+        cakeContainer.style.display = "block";
+        countdownTimer.style.display = "none";
+
+        // Confetti burst
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+        });
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.textContent = String(days).padStart(2, '0');
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minutesEl.textContent = String(minutes).padStart(2, '0');
+      secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    // On page load, handle instantly if past unlock time
+    if (new Date().getTime() >= unlockTime) {
+      cakeContainer.style.display = "block";
+      countdownTimer.style.display = "none";
+
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+    } else {
+      const timer = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    }
+  </script>
+</body>
+</html>
