@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday</title>
+
+  <!-- Romantic Fonts from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #ff007f;
+      --button-color: #ff4da6;
+      --button-hover: #ff3399;
+      --gradient-start: #f8cdda;
+      --gradient-end: #f88fba;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card.show {
+      animation: bounceIn 2s ease-out forwards;
+    }
+
+    .card h1 {
+      font-family: 'Great Vibes', cursive;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+
+    .card p {
+      color: #444;
+      font-size: 1.1em;
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .heart {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: var(--button-color);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 77, 166, 0.5);
+      font-weight: bold;
+      font-size: 1em;
+      transition: background-color 0.5s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 30px 20px;
+      }
+
+      .card h1 {
+        font-size: 2em;
+      }
+
+      .card p {
+        font-size: 1em;
+      }
+
+      .btn {
+        font-size: 0.95em;
+        padding: 10px 20px;
+      }
+
+      .heart {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="card" role="region" aria-label="Birthday greeting">
+    <div class="heart" aria-hidden="true"></div>
+    <h1>Happy Birthday!!</h1>
+    <p> </p>
+    <p style="
+  text-align: justify;
+  max-width: 300px;
+  margin: 0 auto;
+">
+  I just wanted to wish you an amazing birthday.<br>
+  I hope today brings you lots of smiles, and everything that makes you happy.
+  You deserve all the best, not just today, but every day. Happy Birthday!!
+</p>
+    <p style="text-align: left;">Sincerely,<br>Fai</p>
+    <button class="btn" aria-label="Click for a Surprise" onclick="window.location.href='ivy.html?play=1'">
+      Click for a Surprise!
+    </button>
+  </div>
+</main>
+
+<script>
+  window.onload = () => {
+    const card = document.querySelector('.card');
+    setTimeout(() => {
+      card.classList.add('show');
+    }, 100);
+  };
+</script>
+</body>
+</html>
